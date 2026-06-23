@@ -1,10 +1,10 @@
-import build from "./config/esbuild.defaults.js"
+import build from "./config/esbuild.defaults.js";
 
 // You can customize this as you wish, perhaps to add new esbuild plugins.
 //
 // ```
 // import { copy } from 'esbuild-plugin-copy'
-// 
+//
 // const esbuildOptions = {
 //   plugins: [
 //     copy({
@@ -33,12 +33,13 @@ import build from "./config/esbuild.defaults.js"
  * @type {BuildOptions}
  */
 const esbuildOptions = {
+  publicPath: "/rubyturkiye-website/_bridgetown/static",
   plugins: [
     // add new plugins here...
   ],
   globOptions: {
-    excludeFilter: /\.(dsd|lit)\.css$/
-  }
-}
+    excludeFilter: /\.(dsd|lit)\.css$/,
+  },
+};
 
-build(esbuildOptions)
+build(esbuildOptions);
