@@ -7,7 +7,7 @@ page_id: events
 <% en = site.data.i18n.en %>
 
 <!-- Page Header -->
-<section style="padding: 64px 32px 48px; max-width: 1120px; margin: 0 auto; border-bottom: 1px solid #EBEBEB;">
+<section class="page-header container" style="border-bottom: 1px solid #EBEBEB;">
   <div style="font-size: 11px; font-weight: 700; color: #CC0000; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">
     <span class="tr"><%= tr.events.eyebrow %></span><span class="en"><%= en.events.eyebrow %></span>
   </div>
@@ -20,7 +20,7 @@ page_id: events
 </section>
 
 <!-- Upcoming Events -->
-<section style="padding: 48px 32px 32px; max-width: 1120px; margin: 0 auto;">
+<section class="section-pad-events container">
   <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 28px;">
     <span style="display: inline-block; width: 7px; height: 7px; background: #CC0000; border-radius: 50%; flex-shrink: 0;"></span>
     <h2 style="font-size: 12px; font-weight: 700; color: #111; letter-spacing: 0.08em; text-transform: uppercase; margin: 0;">
@@ -30,8 +30,8 @@ page_id: events
   <% if site.data.events.upcoming.to_a.any? %>
   <div style="display: flex; flex-direction: column; gap: 16px;">
     <% site.data.events.upcoming.to_a.each do |ev| %>
-      <div style="display: grid; grid-template-columns: 116px 1fr auto; gap: 28px; align-items: start; padding: 28px; border: 1px solid #E8E8E8; border-radius: 10px; background: #fff;">
-        <div style="text-align: center; padding: 14px 12px; background: #FAFAFA; border-radius: 8px; border: 1px solid #EFEFEF;">
+      <div class="event-row">
+        <div style="text-align: center; padding: 14px 12px; background: #FAFAFA; border-radius: 8px; border: 1px solid #EFEFEF; align-self: flex-start; min-width: 80px;">
           <div style="font-size: 32px; font-weight: 800; color: #CC0000; letter-spacing: -0.05em; line-height: 1;"><%= ev.day %></div>
           <div style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 0.07em; margin-top: 5px;">
             <span class="tr"><%= ev.month_tr %></span><span class="en"><%= ev.month_en %></span>
@@ -48,7 +48,7 @@ page_id: events
           <p style="font-size: 14px; color: #666; line-height: 1.6; margin: 0;">
             <span class="tr"><%= ev.description_tr %></span><span class="en"><%= ev.description_en %></span>
           </p>
-          <div style="display: flex; gap: 24px; margin-top: 2px;">
+          <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 2px;">
             <span style="font-size: 13px; color: #888; font-weight: 500;">
               <span class="tr"><%= ev.location_tr %></span><span class="en"><%= ev.location_en %></span>
             </span>
@@ -57,7 +57,7 @@ page_id: events
             </span>
           </div>
         </div>
-        <div style="flex-shrink: 0; padding-top: 2px;">
+        <div class="event-row-actions">
           <a href="<%= ev.register_url || '#' %>" style="display: inline-block; font-size: 13px; font-weight: 600; color: #fff; background: #CC0000; padding: 10px 20px; border-radius: 7px; white-space: nowrap; text-decoration: none;">
             <span class="tr"><%= tr.events.register %></span><span class="en"><%= en.events.register %></span>
           </a>
@@ -66,7 +66,7 @@ page_id: events
     <% end %>
   </div>
   <% else %>
-  <div style="padding: 64px 32px; text-align: center; background: #FAFAFA; border: 1px solid #EBEBEB; border-radius: 12px;">
+  <div style="padding: 48px 24px; text-align: center; background: #FAFAFA; border: 1px solid #EBEBEB; border-radius: 12px;">
     <div style="width: 44px; height: 44px; background: #FFF0F0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; font-size: 20px;">📅</div>
     <p style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 8px;">
       <span class="tr">Şu an planlanmış etkinlik yok</span><span class="en">No upcoming events right now</span>
@@ -74,7 +74,7 @@ page_id: events
     <p style="font-size: 14px; color: #999; line-height: 1.6; max-width: 340px; margin: 0 auto 24px;">
       <span class="tr">Yeni etkinlik duyuruları için Slack kanalımıza katılın veya Twitter'ı takip edin.</span><span class="en">Join our Slack or follow us on Twitter to hear about new events as they're announced.</span>
     </p>
-    <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+    <div class="cta-group">
       <a href="<%= site.metadata.slack_url %>" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; font-size: 13px; font-weight: 600; color: #fff; background: #CC0000; padding: 10px 20px; border-radius: 7px; text-decoration: none;">
         <span class="tr">Slack'e Katıl</span><span class="en">Join Slack</span>
       </a>
@@ -87,14 +87,14 @@ page_id: events
 </section>
 
 <!-- Past Events -->
-<section style="padding: 24px 32px 80px; max-width: 1120px; margin: 0 auto;">
+<section class="section-pad-past container">
   <div style="display: flex; align-items: center; gap: 10px; padding: 20px 0; border-top: 1px solid #EBEBEB;">
     <h2 style="font-size: 12px; font-weight: 700; color: #111; letter-spacing: 0.08em; text-transform: uppercase; margin: 0;">
       <span class="tr"><%= tr.events.past_label %></span><span class="en"><%= en.events.past_label %></span>
     </h2>
   </div>
   <% site.data.events.past.each do |ev| %>
-    <div style="display: grid; grid-template-columns: 120px 1fr 140px; gap: 24px; align-items: center; padding: 14px 0; border-bottom: 1px solid #F4F4F4;">
+    <div class="past-event-row">
       <span style="font-size: 13px; color: #BBB; font-weight: 400;">
         <span class="tr"><%= ev.date_tr %></span><span class="en"><%= ev.date_en %></span>
       </span>
@@ -120,7 +120,7 @@ page_id: events
           </span>
         <% end %>
       </div>
-      <span style="font-size: 13px; color: #BBB; text-align: right; white-space: nowrap;">
+      <span class="past-event-location">
         <span class="tr"><%= ev.location_tr %></span><span class="en"><%= ev.location_en %></span>
       </span>
     </div>

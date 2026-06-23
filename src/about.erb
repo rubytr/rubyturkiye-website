@@ -7,7 +7,7 @@ page_id: about
 <% en = site.data.i18n.en %>
 
 <!-- Page Header -->
-<section style="padding: 64px 32px 56px; max-width: 1120px; margin: 0 auto; border-bottom: 1px solid #EBEBEB;">
+<section class="page-header container" style="border-bottom: 1px solid #EBEBEB;">
   <div style="font-size: 11px; font-weight: 700; color: #CC0000; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">
     <span class="tr"><%= tr.about.eyebrow %></span><span class="en"><%= en.about.eyebrow %></span>
   </div>
@@ -20,8 +20,8 @@ page_id: about
 </section>
 
 <!-- Mission & Values -->
-<section style="padding: 56px 32px; max-width: 1120px; margin: 0 auto; border-bottom: 1px solid #EBEBEB;">
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;">
+<section class="section-pad container" style="border-bottom: 1px solid #EBEBEB;">
+  <div class="grid-2">
     <div>
       <h2 style="font-size: 20px; font-weight: 700; letter-spacing: -0.03em; color: #111; margin-bottom: 16px;">
         <span class="tr"><%= tr.about.mission_title %></span><span class="en"><%= en.about.mission_title %></span>
@@ -50,11 +50,11 @@ page_id: about
 </section>
 
 <!-- Contact -->
-<section style="padding: 56px 32px 88px; max-width: 1120px; margin: 0 auto;">
+<section class="section-pad-contact container">
   <h2 style="font-size: 20px; font-weight: 700; letter-spacing: -0.03em; color: #111; margin-bottom: 28px;">
     <span class="tr"><%= tr.about.contact_title %></span><span class="en"><%= en.about.contact_title %></span>
   </h2>
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px;">
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px;">
     <% site.data.contacts.each do |ct| %>
       <a href="<%= ct.href %>" target="_blank" rel="noopener noreferrer" class="card-hover" style="display: flex; flex-direction: column; gap: 10px; padding: 24px; border: 1px solid #E8E8E8; border-radius: 10px; background: #fff; text-decoration: none;">
         <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: #BBB;">
