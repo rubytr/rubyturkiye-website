@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <%= render "head", metadata: site.metadata, title: data.title %>
+  </head>
+  <body style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #111; background: #fff; min-height: 100vh; display: flex; flex-direction: column; margin: 0;">
+    <%= render "nav" %>
+    <main style="flex: 1;">
+      <%= yield %>
+    </main>
+    <%= render "footer" %>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<% active = data.page_id || 'home' %>
+<% i18n_tr = site.data.i18n.tr %>
+<% i18n_en = site.data.i18n.en %>
+
+<nav style="position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid #EBEBEB;">
+  <div style="max-width: 1120px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between;">
+
+    <a href="<%= relative_url '/' %>" style="display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; user-select: none;">
+      <img src="<%= relative_url '/images/rubytrlogo.svg' %>" alt="Ruby Türkiye" style="height: 32px; width: 32px; flex-shrink: 0; display: block;">
+      <span style="font-size: 16px; font-weight: 700; letter-spacing: -0.03em; color: #111;">Ruby Türkiye</span>
+    </a>
+
+    <div style="display: flex; align-items: center; gap: 2px;">
+      <a href="<%= relative_url '/' %>" style="font-size: 14px; font-weight: 500; color: <%= active == 'home' ? '#CC0000' : '#555' %>; background: <%= active == 'home' ? '#FFF0F0' : 'transparent' %>; padding: 8px 14px; border-radius: 6px; text-decoration: none;">
+        <span class="tr"><%= i18n_tr.nav.home %></span><span class="en"><%= i18n_en.nav.home %></span>
+      </a>
+      <a href="<%= relative_url '/events' %>" style="font-size: 14px; font-weight: 500; color: <%= active == 'events' ? '#CC0000' : '#555' %>; background: <%= active == 'events' ? '#FFF0F0' : 'transparent' %>; padding: 8px 14px; border-radius: 6px; text-decoration: none;">
+        <span class="tr"><%= i18n_tr.nav.events %></span><span class="en"><%= i18n_en.nav.events %></span>
+      </a>
+      <a href="<%= relative_url '/resources' %>" style="font-size: 14px; font-weight: 500; color: <%= active == 'resources' ? '#CC0000' : '#555' %>; background: <%= active == 'resources' ? '#FFF0F0' : 'transparent' %>; padding: 8px 14px; border-radius: 6px; text-decoration: none;">
+        <span class="tr"><%= i18n_tr.nav.resources %></span><span class="en"><%= i18n_en.nav.resources %></span>
+      </a>
+      <a href="<%= relative_url '/about' %>" style="font-size: 14px; font-weight: 500; color: <%= active == 'about' ? '#CC0000' : '#555' %>; background: <%= active == 'about' ? '#FFF0F0' : 'transparent' %>; padding: 8px 14px; border-radius: 6px; text-decoration: none;">
+        <span class="tr"><%= i18n_tr.nav.about %></span><span class="en"><%= i18n_en.nav.about %></span>
+      </a>
+
+      <div style="width: 1px; height: 16px; background: #E2E2E2; margin: 0 10px; flex-shrink: 0;"></div>
+
+      <div style="display: flex; align-items: center; background: #F2F2F2; border-radius: 7px; padding: 3px; gap: 2px;">
+        <button id="lang-btn-tr" data-lang="tr" class="lang-btn" style="font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 5px; border: none; cursor: pointer; letter-spacing: 0.05em; line-height: 1; transition: background 0.15s, color 0.15s;">TR</button>
+        <button id="lang-btn-en" data-lang="en" class="lang-btn" style="font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 5px; border: none; cursor: pointer; letter-spacing: 0.05em; line-height: 1; transition: background 0.15s, color 0.15s;">EN</button>
+      </div>
+    </div>
+
+  </div>
+</nav>

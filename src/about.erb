@@ -1,0 +1,67 @@
+---
+layout: default
+title: "Hakkında"
+page_id: about
+---
+<% tr = site.data.i18n.tr %>
+<% en = site.data.i18n.en %>
+
+<!-- Page Header -->
+<section style="padding: 64px 32px 56px; max-width: 1120px; margin: 0 auto; border-bottom: 1px solid #EBEBEB;">
+  <div style="font-size: 11px; font-weight: 700; color: #CC0000; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">
+    <span class="tr"><%= tr.about.eyebrow %></span><span class="en"><%= en.about.eyebrow %></span>
+  </div>
+  <h1 style="font-size: 40px; font-weight: 800; letter-spacing: -0.04em; color: #111; margin-bottom: 18px;">
+    <span class="tr"><%= tr.about.title %></span><span class="en"><%= en.about.title %></span>
+  </h1>
+  <p style="font-size: 18px; color: #555; line-height: 1.7; max-width: 620px; margin: 0;">
+    <span class="tr"><%= tr.about.description %></span><span class="en"><%= en.about.description %></span>
+  </p>
+</section>
+
+<!-- Mission & Values -->
+<section style="padding: 56px 32px; max-width: 1120px; margin: 0 auto; border-bottom: 1px solid #EBEBEB;">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;">
+    <div>
+      <h2 style="font-size: 20px; font-weight: 700; letter-spacing: -0.03em; color: #111; margin-bottom: 16px;">
+        <span class="tr"><%= tr.about.mission_title %></span><span class="en"><%= en.about.mission_title %></span>
+      </h2>
+      <p style="font-size: 15px; color: #555; line-height: 1.8; margin: 0;">
+        <span class="tr"><%= tr.about.mission_text %></span><span class="en"><%= en.about.mission_text %></span>
+      </p>
+    </div>
+    <div>
+      <h2 style="font-size: 20px; font-weight: 700; letter-spacing: -0.03em; color: #111; margin-bottom: 20px;">
+        <span class="tr"><%= tr.about.values_title %></span><span class="en"><%= en.about.values_title %></span>
+      </h2>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <% tr.about.values.each_with_index do |value_tr, i| %>
+          <% value_en = en.about.values[i] %>
+          <div style="display: flex; align-items: start; gap: 14px;">
+            <span style="display: inline-block; width: 5px; height: 5px; background: #CC0000; border-radius: 50%; margin-top: 9px; flex-shrink: 0;"></span>
+            <span style="font-size: 15px; color: #444; line-height: 1.7;">
+              <span class="tr"><%= value_tr %></span><span class="en"><%= value_en %></span>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section style="padding: 56px 32px 88px; max-width: 1120px; margin: 0 auto;">
+  <h2 style="font-size: 20px; font-weight: 700; letter-spacing: -0.03em; color: #111; margin-bottom: 28px;">
+    <span class="tr"><%= tr.about.contact_title %></span><span class="en"><%= en.about.contact_title %></span>
+  </h2>
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+    <% site.data.contacts.each do |ct| %>
+      <a href="<%= ct.href %>" target="_blank" rel="noopener noreferrer" class="card-hover" style="display: flex; flex-direction: column; gap: 10px; padding: 24px; border: 1px solid #E8E8E8; border-radius: 10px; background: #fff; text-decoration: none;">
+        <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: #BBB;">
+          <span class="tr"><%= ct.platform_tr %></span><span class="en"><%= ct.platform_en %></span>
+        </span>
+        <span style="font-size: 14px; font-weight: 600; color: #111; line-height: 1.4; word-break: break-all;"><%= ct.handle %></span>
+      </a>
+    <% end %>
+  </div>
+</section>

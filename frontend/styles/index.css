@@ -1,0 +1,36 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #CC0000;
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Language toggle */
+html[lang="en"] .tr { display: none; }
+html[lang="tr"] .en { display: none; }
+
+/* Lang button active states */
+html[lang="tr"] #lang-btn-tr { background: #CC0000; color: #fff; }
+html[lang="tr"] #lang-btn-en { background: transparent; color: #888; }
+html[lang="en"] #lang-btn-en { background: #CC0000; color: #fff; }
+html[lang="en"] #lang-btn-tr { background: transparent; color: #888; }
+
+/* Card hover */
+.card-hover {
+  transition: border-color 0.15s;
+}
+.card-hover:hover {
+  border-color: #CC0000 !important;
+}

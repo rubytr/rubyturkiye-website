@@ -1,0 +1,88 @@
+---
+layout: default
+title: "Kaynaklar"
+page_id: resources
+---
+<% tr = site.data.i18n.tr %>
+<% en = site.data.i18n.en %>
+
+<!-- Page Header -->
+<section style="padding: 64px 32px 56px; max-width: 1120px; margin: 0 auto; border-bottom: 1px solid #EBEBEB;">
+  <div style="font-size: 11px; font-weight: 700; color: #CC0000; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">
+    <span class="tr"><%= tr.resources.eyebrow %></span><span class="en"><%= en.resources.eyebrow %></span>
+  </div>
+  <h1 style="font-size: 40px; font-weight: 800; letter-spacing: -0.04em; color: #111; margin-bottom: 12px;">
+    <span class="tr"><%= tr.resources.title %></span><span class="en"><%= en.resources.title %></span>
+  </h1>
+  <p style="font-size: 16px; color: #666; line-height: 1.65; max-width: 480px; margin: 0;">
+    <span class="tr"><%= tr.resources.subtitle %></span><span class="en"><%= en.resources.subtitle %></span>
+  </p>
+</section>
+
+<!-- Resources Grid -->
+<section style="padding: 56px 32px 88px; max-width: 1120px; margin: 0 auto;">
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; align-items: start;">
+
+    <!-- Books -->
+    <div>
+      <h2 style="font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; margin-bottom: 3px;">
+        <span class="tr"><%= tr.resources.books_title %></span><span class="en"><%= en.resources.books_title %></span>
+      </h2>
+      <p style="font-size: 11px; font-weight: 700; color: #BBB; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 24px; margin-top: 0;">
+        <span class="tr"><%= tr.resources.books_sub %></span><span class="en"><%= en.resources.books_sub %></span>
+      </p>
+      <% site.data.resources.books.each do |book| %>
+        <div style="padding: 16px 0; border-bottom: 1px solid #F0F0F0;">
+          <div style="font-size: 14px; font-weight: 700; color: #111; line-height: 1.35; margin-bottom: 2px;"><%= book.title %></div>
+          <div style="font-size: 12px; color: #CC0000; font-weight: 600; margin-bottom: 6px;"><%= book.author %></div>
+          <div style="font-size: 13px; color: #777; line-height: 1.6;">
+            <span class="tr"><%= book.description_tr %></span><span class="en"><%= book.description_en %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Courses -->
+    <div>
+      <h2 style="font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; margin-bottom: 3px;">
+        <span class="tr"><%= tr.resources.courses_title %></span><span class="en"><%= en.resources.courses_title %></span>
+      </h2>
+      <p style="font-size: 11px; font-weight: 700; color: #BBB; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 24px; margin-top: 0;">
+        <span class="tr"><%= tr.resources.courses_sub %></span><span class="en"><%= en.resources.courses_sub %></span>
+      </p>
+      <% site.data.resources.courses.each do |course| %>
+        <div style="padding: 16px 0; border-bottom: 1px solid #F0F0F0;">
+          <div style="font-size: 14px; font-weight: 700; color: #111; line-height: 1.35; margin-bottom: 2px;"><%= course.name %></div>
+          <div style="font-size: 12px; color: #CC0000; font-weight: 600; margin-bottom: 6px;"><%= course.provider %></div>
+          <div style="font-size: 13px; color: #777; line-height: 1.6;">
+            <span class="tr"><%= course.description_tr %></span><span class="en"><%= course.description_en %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Links -->
+    <div>
+      <h2 style="font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; margin-bottom: 3px;">
+        <span class="tr"><%= tr.resources.links_title %></span><span class="en"><%= en.resources.links_title %></span>
+      </h2>
+      <p style="font-size: 11px; font-weight: 700; color: #BBB; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 24px; margin-top: 0;">
+        <span class="tr"><%= tr.resources.links_sub %></span><span class="en"><%= en.resources.links_sub %></span>
+      </p>
+      <% site.data.resources.links.each do |link| %>
+        <a href="<%= link.url %>" target="_blank" rel="noopener noreferrer" style="display: block; padding: 14px 0; border-bottom: 1px solid #F0F0F0; text-decoration: none;">
+          <div style="display: flex; justify-content: space-between; align-items: start; gap: 8px;">
+            <div>
+              <div style="font-size: 14px; font-weight: 700; color: #111; line-height: 1.35; margin-bottom: 4px;"><%= link.name %></div>
+              <div style="font-size: 13px; color: #777; line-height: 1.5;">
+                <span class="tr"><%= link.description_tr %></span><span class="en"><%= link.description_en %></span>
+              </div>
+            </div>
+            <span style="font-size: 14px; color: #CC0000; flex-shrink: 0; margin-top: 2px;">↗</span>
+          </div>
+        </a>
+      <% end %>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #fff; -webkit-font-smoothing: antialiased; }
+    ::selection { background: #CC0000; color: #fff; }
+    a { text-decoration: none; }
+  </style>
+</helmet>
+
+<div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #111; background: #fff; min-height: 100vh; display: flex; flex-direction: column;">
+
+  <!-- ═══════════════════ NAV ═══════════════════ -->
+  <nav style="position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid #EBEBEB;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between;">
+
+      <div onClick="{{ goHome }}" style="display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; flex-shrink: 0;">
+        <img src="uploads/rubytrlogo.svg" alt="Ruby Türkiye" style="height: 32px; width: 32px; flex-shrink: 0; display: block;">
+        <span style="font-size: 16px; font-weight: 700; letter-spacing: -0.03em; color: #111;">Ruby Türkiye</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 2px;">
+        <div onClick="{{ goHome }}" style="font-size: 14px; font-weight: 500; color: {{ homeNavColor }}; background: {{ homeNavBg }}; padding: 8px 14px; border-radius: 6px; cursor: pointer;">{{ label_home }}</div>
+        <div onClick="{{ goEvents }}" style="font-size: 14px; font-weight: 500; color: {{ eventsNavColor }}; background: {{ eventsNavBg }}; padding: 8px 14px; border-radius: 6px; cursor: pointer;">{{ label_events }}</div>
+        <div onClick="{{ goResources }}" style="font-size: 14px; font-weight: 500; color: {{ resourcesNavColor }}; background: {{ resourcesNavBg }}; padding: 8px 14px; border-radius: 6px; cursor: pointer;">{{ label_resources }}</div>
+        <div onClick="{{ goAbout }}" style="font-size: 14px; font-weight: 500; color: {{ aboutNavColor }}; background: {{ aboutNavBg }}; padding: 8px 14px; border-radius: 6px; cursor: pointer;">{{ label_about }}</div>
+        <div style="width: 1px; height: 16px; background: #E2E2E2; margin: 0 10px; flex-shrink: 0;"></div>
+        <div style="display: flex; align-items: center; background: #F2F2F2; border-radius: 7px; padding: 3px; gap: 2px;">
+          <button onClick="{{ setTR }}" style="font-size: 12px; font-weight: 700; color: {{ trColor }}; background: {{ trBg }}; padding: 5px 11px; border-radius: 5px; border: none; cursor: pointer; letter-spacing: 0.05em; line-height: 1; transition: background 0.15s;">TR</button>
+          <button onClick="{{ setEN }}" style="font-size: 12px; font-weight: 700; color: {{ enColor }}; background: {{ enBg }}; padding: 5px 11px; border-radius: 5px; border: none; cursor: pointer; letter-spacing: 0.05em; line-height: 1; transition: background 0.15s;">EN</button>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ═══════════════════ MAIN ═══════════════════ -->
+  <main style="flex: 1;">
+
+    <!-- ──────────── HOME ──────────── -->
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+
+      <!-- Hero -->
+      <section style="padding: 92px 32px 76px; text-align: center;">
+        <div style="max-width: 1120px; margin: 0 auto;">
+          <div style="display: inline-block; background: #FFF0F0; color: #CC0000; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 28px;">{{ hero_label }}</div>
+          <h1 style="font-size: 56px; font-weight: 800; letter-spacing: -0.045em; line-height: 1.08; color: #111; max-width: 720px; margin: 0 auto 22px; text-wrap: pretty;">{{ hero_title }}</h1>
+          <p style="font-size: 18px; line-height: 1.7; color: #666; max-width: 500px; margin: 0 auto 40px; text-wrap: pretty;">{{ hero_subtitle }}</p>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+            <div onClick="{{ goEvents }}" style="display: inline-flex; align-items: center; background: #CC0000; color: #fff; font-size: 14px; font-weight: 600; padding: 13px 28px; border-radius: 7px; cursor: pointer; letter-spacing: -0.01em;" style-hover="background: #B50000;">{{ hero_cta1 }}</div>
+            <div onClick="{{ goAbout }}" style="display: inline-flex; align-items: center; background: #fff; color: #111; font-size: 14px; font-weight: 600; padding: 12px 28px; border-radius: 7px; cursor: pointer; border: 1.5px solid #DFDFDF; letter-spacing: -0.01em;" style-hover="border-color: #aaa;">{{ hero_cta2 }}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section style="background: #FAFAFA; border-top: 1px solid #EBEBEB; border-bottom: 1px solid #EBEBEB; padding: 0 32px;">
+        <div style="max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr);">
+          <div style="padding: 40px 32px; text-align: center;">
+            <div style="font-size: 40px; font-weight: 800; color: #CC0000; letter-spacing: -0.05em; line-height: 1;">{{ s0v }}</div>
+            <div style="font-size: 11px; font-weight: 700; color: #AAA; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.08em;">{{ s0l }}</div>
+          </div>
+          <div style="padding: 40px 32px; text-align: center; border-left: 1px solid #EBEBEB;">
+            <div style="font-size: 40px; font-weight: 800; color: #CC0000; letter-spacing: -0.05em; line-height: 1;">{{ s1v }}</div>
+            <div style="font-size: 11px; font-weight: 700; color: #AAA; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.08em;">{{ s1l }}</div>
+          </div>
+          <div style="padding: 40px 32px; text-align: center; border-left: 1px solid #EBEBEB;">
+            <div style="font-size: 40px; font-weight: 800; color: #CC0000; letter-spacing: -0.05em; line-height: 1;">{{ s2v }}</div>
+            <div style="font-size: 11px; font-weight: 700; color: #AAA; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.08em;">{{ s2l }}</div>
+          </div>
+          <div style="padding: 40px 32px; text-align: center; border-left: 1px solid #EBEBEB;">
+            <div style="font-size: 40px; font-weight: 800; color: #CC0000; letter-spacing: -0.05em; line-height: 1;">{{ s3v }}</div>
+            <div style="font-size: 11px; font-weight: 700; color: #AAA; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.08em;">{{ s3l }}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Upcoming Events Preview -->
+      <section style="padding: 80px 32px; max-width: 1120px; margin: 0 auto;">
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px;">
+          <div>
+            <div style="font-size: 11px; font-weight: 700; color: #CC0000; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">{{ upcoming_eyebrow }}</div>
+            <h2 style="font-size: 30px; font-weight: 700; letter-spacing: -0.035em; color: #111;">{{ upcoming_title }}</h2>
+          </div>
+          <div onClick="{{ goEvents }}" style="font-size: 13px; font-weight: 600; color: #CC0000; cursor: pointer; display: flex; align-items: center; gap: 5px;" style-hover="opacity: 0.75;">{{ view_all }} →</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+          <div style="border: 1px solid #E8E8E8; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 10px; background: #fff;" style-hover="border-color: #CC0000;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #CC0000; background: #FFF0F0; padding: 4px 10px; border-radius: 100px;">{{ e0_type }}</span>
+              <span style="font-size: 12px; color: #AAA; font-weight: 500;">{{ e0_date }}</span>
+            </div>
+            <h3 style="font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; line-height: 1.35;">{{ e0_title }}</h3>
+            <p style="font-size: 13px; color: #777; line-height: 1.6; flex: 1;">{{ e0_desc }}</p>
+            <div style="font-size: 13px; color: #999; font-weight: 500; padding-top: 10px; border-top: 1px solid #F2F2F2;">{{ e0_loc }}</div>
+          </div>
+          <div style="border: 1px solid #E8E8E8; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 10px; background: #fff;" style-hover="border-color: #CC0000;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #CC0000; background: #FFF0F0; padding: 4px 10px; border-radius: 100px;">{{ e1_type }}</span>
+              <span style="font-size: 12px; color: #AAA; font-weight: 500;">{{ e1_date }}</span>
+            </div>
+            <h3 style="font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; line-height: 1.35;">{{ e1_title }}</h3>
+            <p style="font-size: 13px; color: #777; line-height: 1.6; flex: 1;">{{ e1_desc }}</p>
+            <div style="font-size: 13px; color: #999; font-weight: 500; padding-top: 10px; border-top: 1px solid #F2F2F2;">{{ e1_loc }}</div>
+          </div>
+          <div style="border: 1px solid #E8E8E8; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 10px; background: #fff;" style-hover="border-color: #CC0000;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #CC0000; background: #FFF0F0; padding: 4px 10px; border-radius: 100px;">{{ e2_type }}</span>
+              <span style="font-size: 12px; color: #AAA; font-weight: 500;">{{ e2_date }}</span>
+            </div>
+            <h3 style="font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; line-height: 1.35;">{{ e2_title }}</h3>
+            <p style="font-size: 13px; color: #777; line-height: 1.6; flex: 1;">{{ e2_desc }}</p>
+            <div style="font-size: 13px; color: #999; font-weight: 500; padding-top: 10px; border-top: 1px solid #F2F2F2;">{{ e2_loc }}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Community CTA -->
+      <section style="background: #FAFAFA; border-top: 1px solid #EBEBEB; padding: 80px 32px;">
+        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+          <h2 style="font-size: 30px; font-weight: 700; letter-spacing: -0.035em; color: #111; margin-bottom: 14px;">{{ cta_title }}</h2>
+          <p style="font-size: 15px; color: #666; line-height: 1.75; margin-bottom: 36px; text-wrap: pretty;">{{ cta_subtitle }}</p>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+            <a href="https://discord.gg" target="_blank" style="display: inline-flex; align-items: center; background: #CC0000; color: #fff; font-size: 14px; font-weight: 600; padding: 12px 26px; border-radius: 7px;" style-hover="background: #B50000;">{{ cta_discord }}</a>
+            <a href="https://github.com/rubyturkiye" target="_blank" style="display: inline-flex; align-items: center; background: #fff; color: #111; font-size: 14px; font-weight: 600; padding: 11px 26px; border-radius: 7px; border: 1.5px solid #DFDFDF;" style-hover="border-color: #aaa;">{{ cta_github }}</a>
+          </div>
+        </div>
+      </section>
+
+    </sc-if>
+
+    <!-- ──────────── EVENTS ──────────── -->
+    <sc-if value="{{ isEvents }}" hint-placeholder-val="{{ false }}">
+
+      <section style="padding: 64px 32px 48px; max-width: 1120px; margin: 0 auto; border-bottom: 1px solid #EBEBEB;">
+        <div style="font-size: 11px; font-weight: 700; color: #CC0000; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">{{ evp_eyebrow }}</div>
+        <h1 style="font-size: 40px; font-weight: 800; letter-spacing: -0.04em; color: #111; margin-bottom: 12px;">{{ evp_title }}</h1>
+        <p style="font-size: 16px; color: #666; line-height: 1.65; max-width: 480px; text-wrap: pretty;">{{ evp_subtitle }}</p>
+      </section>
+
+      <!-- Upcoming -->
+      <section style="padding: 48px 32px 32px; max-width: 1120px; margin: 0 auto;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 28px;">
+          <span style="display: inline-block; width: 7px; height: 7px; background: #CC0000; border-radius: 50%;"></span>
+          <h2 style="font-size: 12px; font-weight: 700; color: #111; letter-spacing: 0.08em; text-transform: uppercase;">{{ evp_upcoming_label }}</h2>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <sc-for list="{{ upcomingEvents }}" as="ev" hint-placeholder-count="3">
+            <div style="display: grid; grid-template-columns: 116px 1fr auto; gap: 28px; align-items: start; padding: 28px; border: 1px solid #E8E8E8; border-radius: 10px; background: #fff;">
+              <div style="text-align: center; padding: 14px 12px; background: #FAFAFA; border-radius: 8px; border: 1px solid #EFEFEF;">
+                <div style="font-size: 32px; font-weight: 800; color: #CC0000; letter-spacing: -0.05em; line-height: 1;">{{ ev.day }}</div>
+                <div style="font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 0.07em; margin-top: 5px;">{{ ev.month }}</div>
+                <div style="font-size: 11px; color: #CCC; margin-top: 3px;">{{ ev.year }}</div>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px; min-width: 0;">
+                <span style="display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #CC0000; background: #FFF0F0; padding: 3px 10px; border-radius: 100px; width: fit-content;">{{ ev.type }}</span>
+                <h3 style="font-size: 20px; font-weight: 700; letter-spacing: -0.03em; color: #111; line-height: 1.3;">{{ ev.title }}</h3>
+                <p style="font-size: 14px; color: #666; line-height: 1.6;">{{ ev.description }}</p>
+                <div style="display: flex; gap: 24px; margin-top: 2px;">
+                  <span style="font-size: 13px; color: #888; font-weight: 500;">{{ ev.location }}</span>
+                  <span style="font-size: 13px; color: #BBB;">{{ ev.speaker }}</span>
+                </div>
+              </div>
+              <div style="flex-shrink: 0; padding-top: 2px;">
+                <span style="display: inline-block; font-size: 13px; font-weight: 600; color: #fff; background: #CC0000; padding: 10px 20px; border-radius: 7px; cursor: pointer; white-space: nowrap;" style-hover="background: #B50000;">{{ evp_register }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <!-- Past -->
+      <section style="padding: 24px 32px 80px; max-width: 1120px; margin: 0 auto;">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 20px 0 20px; border-top: 1px solid #EBEBEB; margin-bottom: 0;">
+          <h2 style="font-size: 12px; font-weight: 700; color: #111; letter-spacing: 0.08em; text-transform: uppercase;">{{ evp_past_label }}</h2>
+        </div>
+        <sc-for list="{{ pastEvents }}" as="ev" hint-placeholder-count="7">
+          <div style="display: grid; grid-template-columns: 120px 1fr 140px; gap: 24px; align-items: center; padding: 14px 0; border-bottom: 1px solid #F4F4F4;">
+            <span style="font-size: 13px; color: #BBB; font-weight: 400;">{{ ev.date }}</span>
+            <div style="display: flex; align-items: center; gap: 12px; min-width: 0; overflow: hidden;">
+              <span style="display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #BBB; background: #F5F5F5; padding: 2px 8px; border-radius: 100px; white-space: nowrap; flex-shrink: 0;">{{ ev.type }}</span>
+              <span style="font-size: 15px; font-weight: 600; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ ev.title }}</span>
+            </div>
+            <span style="font-size: 13px; color: #BBB; text-align: right; white-space: nowrap;">{{ ev.location }}</span>
+          </div>
+        </sc-for>
+      </section>
+
+    </sc-if>
+
+    <!-- ──────────── RESOURCES ──────────── -->
+    <sc-if value="{{ isResources }}" hint-placeholder-val="{{ false }}">
+
+      <section style="padding: 64px 32px 56px; max-width: 1120px; margin: 0 auto; border-bottom: 1px solid #EBEBEB;">
+        <div style="font-size: 11px; font-weight: 700; color: #CC0000; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">{{ res_eyebrow }}</div>
+        <h1 style="font-size: 40px; font-weight: 800; letter-spacing: -0.04em; color: #111; margin-bottom: 12px;">{{ res_title }}</h1>
+        <p style="font-size: 16px; color: #666; line-height: 1.65; max-width: 480px; text-wrap: pretty;">{{ res_subtitle }}</p>
+      </section>
+
+      <section style="padding: 56px 32px 88px; max-width: 1120px; margin: 0 auto;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; align-items: start;">
+
+          <div>
+            <h2 style="font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; margin-bottom: 3px;">{{ books_title }}</h2>
+            <p style="font-size: 11px; font-weight: 700; color: #BBB; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 24px;">{{ books_sub }}</p>
+            <sc-for list="{{ books }}" as="b" hint-placeholder-count="5">
+              <div style="padding: 16px 0; border-bottom: 1px solid #F0F0F0;">
+                <div style="font-size: 14px; font-weight: 700; color: #111; line-height: 1.35; margin-bottom: 2px;">{{ b.title }}</div>
+                <div style="font-size: 12px; color: #CC0000; font-weight: 600; margin-bottom: 6px;">{{ b.author }}</div>
+                <div style="font-size: 13px; color: #777; line-height: 1.6;">{{ b.description }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div>
+            <h2 style="font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; margin-bottom: 3px;">{{ courses_title }}</h2>
+            <p style="font-size: 11px; font-weight: 700; color: #BBB; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 24px;">{{ courses_sub }}</p>
+            <sc-for list="{{ courses }}" as="c" hint-placeholder-count="5">
+              <div style="padding: 16px 0; border-bottom: 1px solid #F0F0F0;">
+                <div style="font-size: 14px; font-weight: 700; color: #111; line-height: 1.35; margin-bottom: 2px;">{{ c.name }}</div>
+                <div style="font-size: 12px; color: #CC0000; font-weight: 600; margin-bottom: 6px;">{{ c.provider }}</div>
+                <div style="font-size: 13px; color: #777; line-height: 1.6;">{{ c.description }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div>
+            <h2 style="font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: #111; margin-bottom: 3px;">{{ links_title }}</h2>
+            <p style="font-size: 11px; font-weight: 700; color: #BBB; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 24px;">{{ links_sub }}</p>
+            <sc-for list="{{ links }}" as="lk" hint-placeholder-count="6">
+              <a href="{{ lk.url }}" target="_blank" style="display: block; padding: 14px 0; border-bottom: 1px solid #F0F0F0; cursor: pointer; text-decoration: none;" style-hover="opacity: 0.75;">
+                <div style="display: flex; justify-content: space-between; align-items: start; gap: 8px;">
+                  <div>
+                    <div style="font-size: 14px; font-weight: 700; color: #111; line-height: 1.35; margin-bottom: 4px;">{{ lk.name }}</div>
+                    <div style="font-size: 13px; color: #777; line-height: 1.5;">{{ lk.description }}</div>
+                  </div>
+                  <span style="font-size: 14px; color: #CC0000; flex-shrink: 0; margin-top: 2px;">↗</span>
+                </div>
+              </a>
+            </sc-for>
+          </div>
+
+        </div>
+      </section>
+
+    </sc-if>
+
+    <!-- ──────────── ABOUT ──────────── -->
+    <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+
+      <section style="padding: 64px 32px 56px; max-width: 1120px; margin: 0 auto; border-bottom: 1px solid #EBEBEB;">
+        <div style="font-size: 11px; font-weight: 700; color: #CC0000; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">{{ ab_eyebrow }}</div>
+        <h1 style="font-size: 40px; font-weight: 800; letter-spacing: -0.04em; color: #111; margin-bottom: 18px;">{{ ab_title }}</h1>
+        <p style="font-size: 18px; color: #555; line-height: 1.7; max-width: 620px; text-wrap: pretty;">{{ ab_description }}</p>
+      </section>
+
+      <section style="padding: 56px 32px; max-width: 1120px; margin: 0 auto; border-bottom: 1px solid #EBEBEB;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;">
+          <div>
+            <h2 style="font-size: 20px; font-weight: 700; letter-spacing: -0.03em; color: #111; margin-bottom: 16px;">{{ ab_mission_title }}</h2>
+            <p style="font-size: 15px; color: #555; line-height: 1.8; text-wrap: pretty;">{{ ab_mission_text }}</p>
+          </div>
+          <div>
+            <h2 style="font-size: 20px; font-weight: 700; letter-spacing: -0.03em; color: #111; margin-bottom: 20px;">{{ ab_values_title }}</h2>
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <sc-for list="{{ ab_values }}" as="v" hint-placeholder-count="4">
+                <div style="display: flex; align-items: start; gap: 14px;">
+                  <span style="display: inline-block; width: 5px; height: 5px; background: #CC0000; border-radius: 50%; margin-top: 9px; flex-shrink: 0;"></span>
+                  <span style="font-size: 15px; color: #444; line-height: 1.7;">{{ v.text }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding: 56px 32px 88px; max-width: 1120px; margin: 0 auto;">
+        <h2 style="font-size: 20px; font-weight: 700; letter-spacing: -0.03em; color: #111; margin-bottom: 28px;">{{ ab_contact_title }}</h2>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+          <sc-for list="{{ ab_contacts }}" as="ct" hint-placeholder-count="4">
+            <a href="{{ ct.href }}" target="_blank" style="display: flex; flex-direction: column; gap: 10px; padding: 24px; border: 1px solid #E8E8E8; border-radius: 10px; background: #fff; text-decoration: none; cursor: pointer;" style-hover="border-color: #CC0000;">
+              <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: #BBB;">{{ ct.platform }}</span>
+              <span style="font-size: 14px; font-weight: 600; color: #111; line-height: 1.4; word-break: break-all;">{{ ct.handle }}</span>
+            </a>
+          </sc-for>
+        </div>
+      </section>
+
+    </sc-if>
+
+  </main>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer style="background: #111; padding: 36px 32px;">
+    <div style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 9px;">
+        <img src="uploads/rubytrlogo.svg" alt="Ruby Türkiye" style="height: 28px; width: 28px; flex-shrink: 0; display: block; filter: brightness(0) invert(1);">
+        <span style="font-size: 15px; font-weight: 700; letter-spacing: -0.02em; color: #fff;">Ruby Türkiye</span>
+      </div>
+      <span style="font-size: 13px; color: #555;">{{ footer_text }}</span>
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <a href="https://twitter.com/rubyturkiye" target="_blank" style="font-size: 13px; color: #555; font-weight: 500;" style-hover="color: #888;">Twitter</a>
+        <a href="https://github.com/rubyturkiye" target="_blank" style="font-size: 13px; color: #555; font-weight: 500;" style-hover="color: #888;">GitHub</a>
+        <a href="https://discord.gg/rubyturkiye" target="_blank" style="font-size: 13px; color: #555; font-weight: 500;" style-hover="color: #888;">Discord</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 1440, &quot;height&quot;: 900 },
+  &quot;defaultLang&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;tr&quot;, &quot;options&quot;: [&quot;tr&quot;, &quot;en&quot;], &quot;tsType&quot;: &quot;string&quot; },
+  &quot;defaultPage&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;home&quot;, &quot;options&quot;: [&quot;home&quot;, &quot;events&quot;, &quot;resources&quot;, &quot;about&quot;], &quot;tsType&quot;: &quot;string&quot; }
+}">
+class Component extends DCLogic {
+  state = { page: 'home', lang: 'tr' };
+
+  componentDidMount() {
+    const u = {};
+    if (this.props.defaultPage) u.page = this.props.defaultPage;
+    if (this.props.defaultLang) u.lang = this.props.defaultLang;
+    if (Object.keys(u).length) this.setState(u);
+  }
+
+  C = {
+    tr: {
+      nav: { home: 'Anasayfa', events: 'Etkinlikler', resources: 'Kaynaklar', about: 'Hakkında' },
+      hero: {
+        label: 'Türkiye\'nin Ruby Topluluğu',
+        title: 'Ruby Geliştiricilerini Bir Araya Getiriyoruz',
+        subtitle: 'İstanbul, Ankara, İzmir ve Türkiye\'nin dört bir yanından Ruby ve Rails geliştiricilerinin buluştuğu açık topluluk. Her seviyeden geliştirici için etkinlikler ve kaynaklar.',
+        cta1: 'Etkinliklere Göz At', cta2: 'Hakkımızda',
+        upcomingEyebrow: 'Yaklaşan', upcomingTitle: 'Etkinlikler', viewAll: 'Tümünü Gör',
+        ctaTitle: 'Topluluğa Katıl',
+        ctaSubtitle: 'Discord kanalımıza katılın, GitHub\'da katkıda bulunun ve Türkiye\'nin Ruby ekosistemini birlikte büyütelim.',
+        ctaDiscord: 'Discord\'a Katıl', ctaGithub: 'GitHub\'da Takip Et',
+      },
+      stats: [
+        { value: '500+', label: 'Üye' }, { value: '48', label: 'Etkinlik' },
+        { value: '6', label: 'Şehir' }, { value: '2015', label: 'Kuruluş' },
+      ],
+      preview: [
+        { type: 'Konferans', title: 'RubyKonf Türkiye 2025', date: '20 Eyl 2025',
+          desc: 'Türkiye\'nin en büyük Ruby konferansı. Rails, Hanami ve Ruby ekosistemi üzerine 15+ konuşma.',
+          loc: 'İstanbul — Boğaziçi Üniversitesi' },
+        { type: 'Workshop', title: 'Rails 8 ile API Geliştirme', date: '5 Ağu 2025',
+          desc: 'Solid Queue, Solid Cache ve yeni Rails 8 özelliklerini uygulamalı öğrenin.',
+          loc: 'Ankara — Bilkent Üniversitesi' },
+        { type: 'Meetup', title: 'İzmir Ruby Meetup #13', date: '15 Tem 2025',
+          desc: 'Aylık İzmir buluşması. Ruby 3.4 ve Türkiye\'deki Ruby iş olanakları üzerine açık panel.',
+          loc: 'İzmir — Teknokent' },
+      ],
+      events: {
+        eyebrow: 'Etkinlikler', title: 'Meetuplar ve Konferanslar',
+        subtitle: 'Türkiye genelinde aylık meetuplar, workshoplar ve yılda bir konferans düzenliyoruz.',
+        upcomingLabel: 'Yaklaşan Etkinlikler', pastLabel: 'Geçmiş Etkinlikler', register: 'Kaydol',
+        upcoming: [
+          { day: '20', month: 'Eyl', year: '2025', type: 'Konferans',
+            title: 'RubyKonf Türkiye 2025',
+            description: 'Türkiye\'nin en büyük Ruby konferansı. 15+ konuşmacı, 2 ana salon, atölye çalışmaları ve networking etkinlikleri.',
+            location: 'İstanbul — Boğaziçi Üniversitesi', speaker: 'Çeşitli Konuşmacılar' },
+          { day: '5', month: 'Ağu', year: '2025', type: 'Workshop',
+            title: 'Rails 8 ile API Geliştirme',
+            description: 'Solid Queue, Solid Cache ve yeni Rails 8 özelliklerini uygulamalı öğrenin. Ön koşul: Temel Rails bilgisi.',
+            location: 'Ankara — Bilkent Üniversitesi', speaker: 'Ahmet Kaya' },
+          { day: '15', month: 'Tem', year: '2025', type: 'Meetup',
+            title: 'İzmir Ruby Meetup #13',
+            description: 'Aylık İzmir buluşması. Ruby 3.4 özellikleri ve Türkiye\'deki Ruby iş olanakları üzerine açık panel.',
+            location: 'İzmir — Teknokent', speaker: 'Açık Panel' },
+        ],
+        past: [
+          { date: '10 May 2025', type: 'Workshop', title: 'Rails 8.0 Yenilikleri', location: 'İstanbul' },
+          { date: '15 Mar 2025', type: 'Meetup', title: 'Ruby 3.4 ile Concurrency', location: 'Ankara' },
+          { date: '20 Oca 2025', type: 'Workshop', title: 'Hotwire ve Turbo ile Modern Web', location: 'İstanbul' },
+          { date: '28 Eyl 2024', type: 'Konferans', title: 'RubyKonf Türkiye 2024', location: 'İstanbul' },
+          { date: '12 Tem 2024', type: 'Meetup', title: 'Sorbet ile Tip Güvenliği', location: 'İzmir' },
+          { date: '18 May 2024', type: 'Workshop', title: 'RSpec ile Test Odaklı Geliştirme', location: 'Ankara' },
+          { date: '2 Mar 2024', type: 'Meetup', title: 'Ruby Metaprogramlama', location: 'İstanbul' },
+        ],
+      },
+      resources: {
+        eyebrow: 'Kaynaklar', title: 'Öğrenme Materyalleri',
+        subtitle: 'Ruby ve Rails öğrenmek için topluluk tarafından önerilen kitaplar, kurslar ve web kaynakları.',
+        booksTitle: 'Kitaplar', booksSub: 'Basılı ve dijital',
+        coursesTitle: 'Kurslar', coursesSub: 'Online platformlar',
+        linksTitle: 'Bağlantılar', linksSub: 'Web kaynakları',
+        books: [
+          { title: 'Programming Ruby 3.3', author: 'Dave Thomas',
+            description: 'Ruby\'nin anahtarı. Her Ruby geliştiricisinin okuması gereken temel başvuru kaynağı.' },
+          { title: 'The Well-Grounded Rubyist', author: 'David A. Black',
+            description: 'Ruby\'nin derinliklerine inen, dili gerçekten anlamak için mükemmel bir kaynak.' },
+          { title: 'Eloquent Ruby', author: 'Russ Olsen',
+            description: 'Idiomatic, Ruby tarzı kod yazmayı öğreten klasik bir kitap.' },
+          { title: 'POODR', author: 'Sandi Metz',
+            description: 'Ruby\'de nesne yönelimli tasarım prensiplerini öğrenmek için en iyi kaynak.' },
+          { title: 'Rails 8 Up and Running', author: 'Jeremy McAnally',
+            description: 'Rails 8\'in tüm yeni özelliklerini kapsayan güncel bir başlangıç rehberi.' },
+        ],
+        courses: [
+          { name: 'GoRails', provider: 'gorails.com',
+            description: 'Haftalık Rails screencasts. Her inceliği öğrenmek için en kapsamlı kaynak.' },
+          { name: 'The Odin Project', provider: 'theodinproject.com',
+            description: 'Ücretsiz, kapsamlı Ruby ve Rails yolu. Sıfırdan başlayanlar için ideal.' },
+          { name: 'Upcase by Thoughtbot', provider: 'thoughtbot.com',
+            description: 'TDD, refactoring ve Ruby best practices üzerine odaklanan kaliteli içerik.' },
+          { name: 'Learn Ruby on Rails', provider: 'Udemy',
+            description: 'Türkçe altyazı seçeneği mevcut. Başlangıç seviyesi için kapsamlı kurs.' },
+          { name: 'RailsCasts', provider: 'railscasts.com',
+            description: 'Ryan Bates\'in klasik screencast serisi. Hâlâ değerli içerikler barındırıyor.' },
+        ],
+        links: [
+          { name: 'ruby-lang.org', description: 'Resmi Ruby web sitesi, belgeler ve indirme.', url: 'https://ruby-lang.org' },
+          { name: 'rubygems.org', description: 'Ruby gem deposu ve paket yönetimi.', url: 'https://rubygems.org' },
+          { name: 'rubyonrails.org', description: 'Rails framework\'ün resmi sitesi.', url: 'https://rubyonrails.org' },
+          { name: 'ruby-toolbox.com', description: 'Gem karşılaştırma ve popülerlik istatistikleri.', url: 'https://www.ruby-toolbox.com' },
+          { name: 'ruby.social', description: 'Ruby geliştiricilerinin Mastodon topluluğu.', url: 'https://ruby.social' },
+          { name: 'APIdock', description: 'Ruby, Rails ve RSpec API referansı.', url: 'https://apidock.com' },
+        ],
+      },
+      about: {
+        eyebrow: 'Hakkımızda', title: 'Ruby Türkiye\'yi Tanıyın',
+        description: 'Ruby Türkiye, 2015 yılında İstanbul\'da küçük bir grupla başlayan ve bugün Türkiye genelinde 500\'den fazla geliştiriciye ulaşan açık bir topluluktur.',
+        missionTitle: 'Misyonumuz',
+        missionText: 'Ruby ve Ruby on Rails ekosistemini Türkiye\'de büyütmek, geliştiricilerin birbirleriyle bağlantı kurmasını sağlamak ve Türkçe kaynak açığını kapatmaktır. Açık kaynak ruhunu benimseyerek tüm üyelerimizi katkıda bulunmaya davet ediyoruz.',
+        valuesTitle: 'Değerlerimiz',
+        values: [
+          { text: 'Açık ve kapsayıcı bir topluluk — her seviyeden geliştirici hoş geldiniz' },
+          { text: 'Bilginin paylaşılması ve açık kaynak ruhunun benimsenmesi' },
+          { text: 'Şehirler ve üniversiteler arası köprü kurma' },
+          { text: 'Türkçe içerik üretimine katkı sağlama' },
+        ],
+        contactTitle: 'Bize Ulaşın',
+        contacts: [
+          { platform: 'E-posta', handle: 'merhaba@rubyturkiye.org', href: 'mailto:merhaba@rubyturkiye.org' },
+          { platform: 'GitHub', handle: 'github.com/rubyturkiye', href: 'https://github.com/rubyturkiye' },
+          { platform: 'Twitter / X', handle: '@rubyturkiye', href: 'https://twitter.com/rubyturkiye' },
+          { platform: 'Discord', handle: 'discord.gg/rubyturkiye', href: 'https://discord.gg/rubyturkiye' },
+        ],
+      },
+      footer: '© 2025 Ruby Türkiye. Açık kaynak topluluk.',
+    },
+    en: {
+      nav: { home: 'Home', events: 'Events', resources: 'Resources', about: 'About' },
+      hero: {
+        label: 'Turkey\'s Ruby Community',
+        title: 'Bringing Ruby Developers Together',
+        subtitle: 'An open community for Ruby and Rails developers across Istanbul, Ankara, Izmir, and all of Turkey. Events and resources for developers of all levels.',
+        cta1: 'Browse Events', cta2: 'About Us',
+        upcomingEyebrow: 'Upcoming', upcomingTitle: 'Events', viewAll: 'View All',
+        ctaTitle: 'Join the Community',
+        ctaSubtitle: 'Join our Discord, follow us on GitHub, and help grow the Ruby ecosystem in Turkey together.',
+        ctaDiscord: 'Join Discord', ctaGithub: 'Follow on GitHub',
+      },
+      stats: [
+        { value: '500+', label: 'Members' }, { value: '48', label: 'Events' },
+        { value: '6', label: 'Cities' }, { value: '2015', label: 'Founded' },
+      ],
+      preview: [
+        { type: 'Conference', title: 'RubyKonf Turkey 2025', date: 'Sep 20, 2025',
+          desc: 'Turkey\'s biggest Ruby conference. 15+ talks on Rails, Hanami, and the Ruby ecosystem.',
+          loc: 'Istanbul — Bosphorus University' },
+        { type: 'Workshop', title: 'API Development with Rails 8', date: 'Aug 5, 2025',
+          desc: 'Hands-on with Solid Queue, Solid Cache, and new Rails 8 features. Prerequisite: Basic Rails.',
+          loc: 'Ankara — Bilkent University' },
+        { type: 'Meetup', title: 'Izmir Ruby Meetup #13', date: 'Jul 15, 2025',
+          desc: 'Monthly Izmir gathering. Ruby 3.4 features and a panel on Ruby jobs in Turkey.',
+          loc: 'Izmir — Technopolis' },
+      ],
+      events: {
+        eyebrow: 'Events', title: 'Meetups & Conferences',
+        subtitle: 'Ruby Türkiye organizes monthly meetups in different cities, workshops, and an annual conference.',
+        upcomingLabel: 'Upcoming Events', pastLabel: 'Past Events', register: 'Register',
+        upcoming: [
+          { day: '20', month: 'Sep', year: '2025', type: 'Conference',
+            title: 'RubyKonf Turkey 2025',
+            description: 'Turkey\'s biggest Ruby conference. 15+ speakers, 2 main stages, workshops, and networking.',
+            location: 'Istanbul — Bosphorus University', speaker: 'Multiple Speakers' },
+          { day: '5', month: 'Aug', year: '2025', type: 'Workshop',
+            title: 'API Development with Rails 8',
+            description: 'Hands-on with Solid Queue, Solid Cache, and new Rails 8 features. Prerequisite: Basic Rails.',
+            location: 'Ankara — Bilkent University', speaker: 'Ahmet Kaya' },
+          { day: '15', month: 'Jul', year: '2025', type: 'Meetup',
+            title: 'Izmir Ruby Meetup #13',
+            description: 'Monthly Izmir gathering. Ruby 3.4 features and a panel on Ruby job opportunities in Turkey.',
+            location: 'Izmir — Technopolis', speaker: 'Open Panel' },
+        ],
+        past: [
+          { date: 'May 10, 2025', type: 'Workshop', title: "What's New in Rails 8.0", location: 'Istanbul' },
+          { date: 'Mar 15, 2025', type: 'Meetup', title: 'Concurrency with Ruby 3.4', location: 'Ankara' },
+          { date: 'Jan 20, 2025', type: 'Workshop', title: 'Modern Web with Hotwire & Turbo', location: 'Istanbul' },
+          { date: 'Sep 28, 2024', type: 'Conference', title: 'RubyKonf Turkey 2024', location: 'Istanbul' },
+          { date: 'Jul 12, 2024', type: 'Meetup', title: 'Type Safety with Sorbet', location: 'Izmir' },
+          { date: 'May 18, 2024', type: 'Workshop', title: 'Test-Driven Dev with RSpec', location: 'Ankara' },
+          { date: 'Mar 2, 2024', type: 'Meetup', title: 'Ruby Metaprogramming Deep Dive', location: 'Istanbul' },
+        ],
+      },
+      resources: {
+        eyebrow: 'Resources', title: 'Learning Materials',
+        subtitle: 'Books, courses, and web resources recommended by the community for learning Ruby and Rails.',
+        booksTitle: 'Books', booksSub: 'Print & digital',
+        coursesTitle: 'Courses', coursesSub: 'Online platforms',
+        linksTitle: 'Links', linksSub: 'Web resources',
+        books: [
+          { title: 'Programming Ruby 3.3', author: 'Dave Thomas',
+            description: 'The Pickaxe Book. The essential reference every Ruby developer should read.' },
+          { title: 'The Well-Grounded Rubyist', author: 'David A. Black',
+            description: 'Dives deep into Ruby\'s internals — perfect for truly understanding the language.' },
+          { title: 'Eloquent Ruby', author: 'Russ Olsen',
+            description: 'A classic guide to writing idiomatic, Ruby-style code.' },
+          { title: 'POODR', author: 'Sandi Metz',
+            description: 'The best book for learning object-oriented design principles in Ruby.' },
+          { title: 'Rails 8 Up and Running', author: 'Jeremy McAnally',
+            description: 'An up-to-date beginner\'s guide covering all new Rails 8 features.' },
+        ],
+        courses: [
+          { name: 'GoRails', provider: 'gorails.com',
+            description: 'Weekly Rails screencasts. The best resource for mastering every Rails nuance.' },
+          { name: 'The Odin Project', provider: 'theodinproject.com',
+            description: 'Free, comprehensive Ruby and Rails path. Ideal for those starting from scratch.' },
+          { name: 'Upcase by Thoughtbot', provider: 'thoughtbot.com',
+            description: 'Quality content focused on TDD, refactoring, and Ruby best practices.' },
+          { name: 'Learn Ruby on Rails', provider: 'Udemy',
+            description: 'Comprehensive beginner-level course with Turkish subtitle option available.' },
+          { name: 'RailsCasts', provider: 'railscasts.com',
+            description: 'Ryan Bates\' classic screencast series. Still holds valuable content.' },
+        ],
+        links: [
+          { name: 'ruby-lang.org', description: 'Official Ruby website, docs, and downloads.', url: 'https://ruby-lang.org' },
+          { name: 'rubygems.org', description: 'The Ruby gem repository and package management.', url: 'https://rubygems.org' },
+          { name: 'rubyonrails.org', description: 'Official Rails framework website.', url: 'https://rubyonrails.org' },
+          { name: 'ruby-toolbox.com', description: 'Gem comparison and popularity statistics.', url: 'https://www.ruby-toolbox.com' },
+          { name: 'ruby.social', description: 'Mastodon community for Ruby developers.', url: 'https://ruby.social' },
+          { name: 'APIdock', description: 'API reference for Ruby, Rails, and RSpec.', url: 'https://apidock.com' },
+        ],
+      },
+      about: {
+        eyebrow: 'About', title: 'About Ruby Türkiye',
+        description: 'Ruby Türkiye is an open community that started with a small group in Istanbul in 2015 and has grown to reach more than 500 developers across Turkey.',
+        missionTitle: 'Our Mission',
+        missionText: 'To grow the Ruby and Rails ecosystem in Turkey, help developers connect with each other, and close the gap in Turkish-language resources. We embrace the open-source spirit and invite all community members to contribute.',
+        valuesTitle: 'Our Values',
+        values: [
+          { text: 'An open and inclusive community — developers of all levels welcome' },
+          { text: 'Knowledge sharing and embracing the open-source spirit' },
+          { text: 'Building bridges between cities and universities' },
+          { text: 'Contributing to Turkish-language content creation' },
+        ],
+        contactTitle: 'Get in Touch',
+        contacts: [
+          { platform: 'Email', handle: 'merhaba@rubyturkiye.org', href: 'mailto:merhaba@rubyturkiye.org' },
+          { platform: 'GitHub', handle: 'github.com/rubyturkiye', href: 'https://github.com/rubyturkiye' },
+          { platform: 'Twitter / X', handle: '@rubyturkiye', href: 'https://twitter.com/rubyturkiye' },
+          { platform: 'Discord', handle: 'discord.gg/rubyturkiye', href: 'https://discord.gg/rubyturkiye' },
+        ],
+      },
+      footer: '© 2025 Ruby Türkiye. Open source community.',
+    },
+  };
+
+  renderVals() {
+    const { page, lang } = this.state;
+    const t = this.C[lang];
+    const hr = t.hero;
+    const st = t.stats;
+    const pr = t.preview;
+    const ev = t.events;
+    const res = t.resources;
+    const ab = t.about;
+
+    const navActive = (p) => ({
+      color: page === p ? '#CC0000' : '#555',
+      bg: page === p ? '#FFF0F0' : 'transparent',
+    });
+    const hn = navActive('home');
+    const en = navActive('events');
+    const rn = navActive('resources');
+    const an = navActive('about');
+
+    return {
+      // Routing
+      isHome: page === 'home',
+      isEvents: page === 'events',
+      isResources: page === 'resources',
+      isAbout: page === 'about',
+
+      goHome: () => { this.setState({ page: 'home' }); window.scrollTo(0, 0); },
+      goEvents: () => { this.setState({ page: 'events' }); window.scrollTo(0, 0); },
+      goResources: () => { this.setState({ page: 'resources' }); window.scrollTo(0, 0); },
+      goAbout: () => { this.setState({ page: 'about' }); window.scrollTo(0, 0); },
+
+      // Lang toggle
+      setTR: () => this.setState({ lang: 'tr' }),
+      setEN: () => this.setState({ lang: 'en' }),
+      trColor: lang === 'tr' ? '#fff' : '#888',
+      trBg: lang === 'tr' ? '#CC0000' : 'transparent',
+      enColor: lang === 'en' ? '#fff' : '#888',
+      enBg: lang === 'en' ? '#CC0000' : 'transparent',
+
+      // Nav active states
+      homeNavColor: hn.color, homeNavBg: hn.bg,
+      eventsNavColor: en.color, eventsNavBg: en.bg,
+      resourcesNavColor: rn.color, resourcesNavBg: rn.bg,
+      aboutNavColor: an.color, aboutNavBg: an.bg,
+
+      // Nav labels
+      label_home: t.nav.home, label_events: t.nav.events,
+      label_resources: t.nav.resources, label_about: t.nav.about,
+
+      // HOME - Hero
+      hero_label: hr.label, hero_title: hr.title, hero_subtitle: hr.subtitle,
+      hero_cta1: hr.cta1, hero_cta2: hr.cta2,
+
+      // HOME - Stats (hardcoded 4 cells)
+      s0v: st[0].value, s0l: st[0].label,
+      s1v: st[1].value, s1l: st[1].label,
+      s2v: st[2].value, s2l: st[2].label,
+      s3v: st[3].value, s3l: st[3].label,
+
+      // HOME - Event preview (hardcoded 3 cards)
+      upcoming_eyebrow: hr.upcomingEyebrow, upcoming_title: hr.upcomingTitle, view_all: hr.viewAll,
+      e0_type: pr[0].type, e0_date: pr[0].date, e0_title: pr[0].title, e0_desc: pr[0].desc, e0_loc: pr[0].loc,
+      e1_type: pr[1].type, e1_date: pr[1].date, e1_title: pr[1].title, e1_desc: pr[1].desc, e1_loc: pr[1].loc,
+      e2_type: pr[2].type, e2_date: pr[2].date, e2_title: pr[2].title, e2_desc: pr[2].desc, e2_loc: pr[2].loc,
+
+      // HOME - CTA
+      cta_title: hr.ctaTitle, cta_subtitle: hr.ctaSubtitle,
+      cta_discord: hr.ctaDiscord, cta_github: hr.ctaGithub,
+
+      // EVENTS PAGE
+      evp_eyebrow: ev.eyebrow, evp_title: ev.title, evp_subtitle: ev.subtitle,
+      evp_upcoming_label: ev.upcomingLabel, evp_past_label: ev.pastLabel, evp_register: ev.register,
+      upcomingEvents: ev.upcoming,
+      pastEvents: ev.past,
+
+      // RESOURCES PAGE
+      res_eyebrow: res.eyebrow, res_title: res.title, res_subtitle: res.subtitle,
+      books_title: res.booksTitle, books_sub: res.booksSub,
+      courses_title: res.coursesTitle, courses_sub: res.coursesSub,
+      links_title: res.linksTitle, links_sub: res.linksSub,
+      books: res.books, courses: res.courses, links: res.links,
+
+      // ABOUT PAGE
+      ab_eyebrow: ab.eyebrow, ab_title: ab.title, ab_description: ab.description,
+      ab_mission_title: ab.missionTitle, ab_mission_text: ab.missionText,
+      ab_values_title: ab.valuesTitle, ab_values: ab.values,
+      ab_contact_title: ab.contactTitle, ab_contacts: ab.contacts,
+
+      // FOOTER
+      footer_text: t.footer,
+    };
+  }
+}
+</script>
+</body>
+</html>
