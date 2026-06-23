@@ -27,8 +27,9 @@ page_id: events
       <span class="tr"><%= tr.events.upcoming_label %></span><span class="en"><%= en.events.upcoming_label %></span>
     </h2>
   </div>
+  <% if site.data.events.upcoming.to_a.any? %>
   <div style="display: flex; flex-direction: column; gap: 16px;">
-    <% site.data.events.upcoming.each do |ev| %>
+    <% site.data.events.upcoming.to_a.each do |ev| %>
       <div style="display: grid; grid-template-columns: 116px 1fr auto; gap: 28px; align-items: start; padding: 28px; border: 1px solid #E8E8E8; border-radius: 10px; background: #fff;">
         <div style="text-align: center; padding: 14px 12px; background: #FAFAFA; border-radius: 8px; border: 1px solid #EFEFEF;">
           <div style="font-size: 32px; font-weight: 800; color: #CC0000; letter-spacing: -0.05em; line-height: 1;"><%= ev.day %></div>
@@ -64,6 +65,25 @@ page_id: events
       </div>
     <% end %>
   </div>
+  <% else %>
+  <div style="padding: 64px 32px; text-align: center; background: #FAFAFA; border: 1px solid #EBEBEB; border-radius: 12px;">
+    <div style="width: 44px; height: 44px; background: #FFF0F0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; font-size: 20px;">📅</div>
+    <p style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 8px;">
+      <span class="tr">Şu an planlanmış etkinlik yok</span><span class="en">No upcoming events right now</span>
+    </p>
+    <p style="font-size: 14px; color: #999; line-height: 1.6; max-width: 340px; margin: 0 auto 24px;">
+      <span class="tr">Yeni etkinlik duyuruları için Slack kanalımıza katılın veya Twitter'ı takip edin.</span><span class="en">Join our Slack or follow us on Twitter to hear about new events as they're announced.</span>
+    </p>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+      <a href="<%= site.metadata.slack_url %>" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; font-size: 13px; font-weight: 600; color: #fff; background: #CC0000; padding: 10px 20px; border-radius: 7px; text-decoration: none;">
+        <span class="tr">Slack'e Katıl</span><span class="en">Join Slack</span>
+      </a>
+      <a href="<%= site.metadata.x_url %>" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; font-size: 13px; font-weight: 600; color: #555; background: #fff; padding: 9px 20px; border-radius: 7px; border: 1.5px solid #DFDFDF; text-decoration: none;">
+        X
+      </a>
+    </div>
+  </div>
+  <% end %>
 </section>
 
 <!-- Past Events -->
@@ -82,9 +102,23 @@ page_id: events
         <span style="display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #BBB; background: #F5F5F5; padding: 2px 8px; border-radius: 100px; white-space: nowrap; flex-shrink: 0;">
           <span class="tr"><%= ev.type_tr %></span><span class="en"><%= ev.type_en %></span>
         </span>
-        <span style="font-size: 15px; font-weight: 600; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-          <span class="tr"><%= ev.title_tr %></span><span class="en"><%= ev.title_en %></span>
-        </span>
+        <% urls = ev.youtube_urls.to_a %>
+        <% if urls.length == 1 %>
+          <a href="<%= urls.first %>" target="_blank" rel="noopener noreferrer" style="font-size: 15px; font-weight: 600; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-decoration: none;">
+            <span class="tr"><%= ev.title_tr %></span><span class="en"><%= ev.title_en %></span>
+          </a>
+        <% elsif urls.length > 1 %>
+          <span style="font-size: 15px; font-weight: 600; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <span class="tr"><%= ev.title_tr %></span><span class="en"><%= ev.title_en %></span>
+          </span>
+          <% urls.each_with_index do |url, i| %>
+            <a href="<%= url %>" target="_blank" rel="noopener noreferrer" style="font-size: 11px; font-weight: 600; color: #CC0000; text-decoration: none; flex-shrink: 0;">▶ <%= i + 1 %></a>
+          <% end %>
+        <% else %>
+          <span style="font-size: 15px; font-weight: 600; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            <span class="tr"><%= ev.title_tr %></span><span class="en"><%= ev.title_en %></span>
+          </span>
+        <% end %>
       </div>
       <span style="font-size: 13px; color: #BBB; text-align: right; white-space: nowrap;">
         <span class="tr"><%= ev.location_tr %></span><span class="en"><%= ev.location_en %></span>

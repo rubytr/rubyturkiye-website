@@ -14,8 +14,8 @@ tr:
     upcoming_title: "Etkinlikler"
     view_all: "Tümünü Gör"
     cta_title: "Topluluğa Katıl"
-    cta_subtitle: "Discord kanalımıza katılın, GitHub'da katkıda bulunun ve Türkiye'nin Ruby ekosistemini birlikte büyütelim."
-    cta_discord: "Discord'a Katıl"
+    cta_subtitle: "Slack kanalımıza katılın, GitHub'da katkıda bulunun ve Türkiye'nin Ruby ekosistemini birlikte büyütelim."
+    cta_slack: "Slack'e Katıl"
     cta_github: "GitHub'da Takip Et"
   stats:
     - value: "500+"
@@ -29,7 +29,7 @@ tr:
   events:
     eyebrow: "Etkinlikler"
     title: "Meetuplar ve Konferanslar"
-    subtitle: "Türkiye genelinde aylık meetuplar, workshoplar ve yılda bir konferans düzenliyoruz."
+    subtitle: "Türkiye genelindeki aylık meetuplar, workshoplar."
     upcoming_label: "Yaklaşan Etkinlikler"
     past_label: "Geçmiş Etkinlikler"
     register: "Kaydol"
@@ -74,8 +74,8 @@ en:
     upcoming_title: "Events"
     view_all: "View All"
     cta_title: "Join the Community"
-    cta_subtitle: "Join our Discord, follow us on GitHub, and help grow the Ruby ecosystem in Turkey together."
-    cta_discord: "Join Discord"
+    cta_subtitle: "Join our Slack, follow us on GitHub, and help grow the Ruby ecosystem in Turkey together."
+    cta_slack: "Join Slack"
     cta_github: "Follow on GitHub"
   stats:
     - value: "500+"
@@ -89,7 +89,7 @@ en:
   events:
     eyebrow: "Events"
     title: "Meetups & Conferences"
-    subtitle: "Ruby Türkiye organizes monthly meetups in different cities, workshops, and an annual conference."
+    subtitle: "Ruby Türkiye organizes monthly meetups in different cities, workshops."
     upcoming_label: "Upcoming Events"
     past_label: "Past Events"
     register: "Register"
