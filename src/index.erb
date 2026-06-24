@@ -30,7 +30,7 @@ page_id: home
 </section>
 
 <!-- Upcoming Events Preview -->
-<section style="padding: 48px 0 32px;" class="container">
+<section style="padding-top: 48px; padding-bottom: 32px;" class="container">
   <div class="section-header" style="padding: 0 0 0 0;">
     <div>
       <div style="font-size: 11px; font-weight: 700; color: #CC0000; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">
@@ -83,6 +83,36 @@ page_id: home
       </a>
     </div>
   <% end %>
+</section>
+
+<!-- Yakut -->
+<% yakut = site.data.yakut %>
+<section style="padding-top: 48px; padding-bottom: 48px; border-top: 1px solid #EBEBEB;" class="container">
+  <div class="section-header" style="padding: 0 0 28px 0;">
+    <div>
+      <div style="font-size: 11px; font-weight: 700; color: #CC0000; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;">
+        <span class="tr"><%= tr.yakut.eyebrow %></span><span class="en"><%= en.yakut.eyebrow %></span>
+      </div>
+      <h2 style="font-size: 30px; font-weight: 700; letter-spacing: -0.035em; color: #111;">
+        <%= tr.yakut.title %>
+      </h2>
+    </div>
+    <a href="https://www.youtube.com/playlist?list=<%= yakut.playlist_id %>" target="_blank" rel="noopener noreferrer" style="font-size: 13px; font-weight: 600; color: #CC0000; text-decoration: none; display: flex; align-items: center; gap: 5px; white-space: nowrap;">
+      <span class="tr"><%= tr.yakut.all_episodes %></span><span class="en"><%= en.yakut.all_episodes %></span> →
+    </a>
+  </div>
+  <p style="font-size: 15px; color: #666; line-height: 1.65; max-width: 540px; margin: 0 0 24px;">
+    <span class="tr"><%= tr.yakut.subtitle %></span><span class="en"><%= en.yakut.subtitle %></span>
+  </p>
+  <div style="position: relative; width: 100%; padding-bottom: 56.25%; border-radius: 12px; overflow: hidden; background: #000;">
+    <iframe
+      src="https://www.youtube.com/embed/<%= yakut.latest_video_id %>?list=<%= yakut.playlist_id %>&rel=0"
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      loading="lazy"
+      title="Yakut"></iframe>
+  </div>
 </section>
 
 <!-- Community CTA -->

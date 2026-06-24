@@ -103,21 +103,20 @@ page_id: events
           <span class="tr"><%= ev.type_tr %></span><span class="en"><%= ev.type_en %></span>
         </span>
         <% urls = ev.youtube_urls.to_a %>
+        <span style="font-size: 15px; font-weight: 600; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+          <span class="tr"><%= ev.title_tr %></span><span class="en"><%= ev.title_en %></span>
+        </span>
         <% if urls.length == 1 %>
-          <a href="<%= urls.first %>" target="_blank" rel="noopener noreferrer" style="font-size: 15px; font-weight: 600; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-decoration: none;">
-            <span class="tr"><%= ev.title_tr %></span><span class="en"><%= ev.title_en %></span>
+          <a href="<%= urls.first %>" target="_blank" rel="noopener noreferrer" title="YouTube'da izle" style="flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 18px; background: #FF0000; border-radius: 4px; text-decoration: none;">
+            <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polygon points="3,2 3,8 8,5" fill="white"/></svg>
           </a>
         <% elsif urls.length > 1 %>
-          <span style="font-size: 15px; font-weight: 600; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-            <span class="tr"><%= ev.title_tr %></span><span class="en"><%= ev.title_en %></span>
-          </span>
           <% urls.each_with_index do |url, i| %>
-            <a href="<%= url %>" target="_blank" rel="noopener noreferrer" style="font-size: 11px; font-weight: 600; color: #CC0000; text-decoration: none; flex-shrink: 0;">▶ <%= i + 1 %></a>
+            <a href="<%= url %>" target="_blank" rel="noopener noreferrer" title="YouTube'da izle" style="flex-shrink: 0; display: inline-flex; align-items: center; gap: 3px; background: #FF0000; border-radius: 4px; padding: 3px 7px; text-decoration: none;">
+              <svg width="8" height="8" viewBox="0 0 10 10" fill="none"><polygon points="3,2 3,8 8,5" fill="white"/></svg>
+              <span style="font-size: 10px; font-weight: 700; color: white; line-height: 1;"><%= i + 1 %></span>
+            </a>
           <% end %>
-        <% else %>
-          <span style="font-size: 15px; font-weight: 600; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-            <span class="tr"><%= ev.title_tr %></span><span class="en"><%= ev.title_en %></span>
-          </span>
         <% end %>
       </div>
       <span class="past-event-location">

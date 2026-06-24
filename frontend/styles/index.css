@@ -355,7 +355,7 @@ html[lang="en"] #lang-btn-tr { background: transparent; color: #888; }
 
 @media (min-width: 640px) {
   .past-event-row {
-    grid-template-columns: 120px 1fr 140px;
+    grid-template-columns: 120px 1fr auto;
     gap: 24px;
     align-items: center;
   }

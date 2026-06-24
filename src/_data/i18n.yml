@@ -26,6 +26,11 @@ tr:
       label: "Şehir"
     - value: "2015"
       label: "Kuruluş"
+  yakut:
+    eyebrow: "Videocast"
+    title: "Yakut"
+    subtitle: "Ruby dünyasında olup bitenleri her hafta konuşuyoruz."
+    all_episodes: "Tüm Bölümler"
   events:
     eyebrow: "Etkinlikler"
     title: "Meetuplar ve Konferanslar"
@@ -86,6 +91,11 @@ en:
       label: "Cities"
     - value: "2015"
       label: "Founded"
+  yakut:
+    eyebrow: "Videocast"
+    title: "Yakut"
+    subtitle: "We talk about what's happening in the Ruby world every week."
+    all_episodes: "All Episodes"
   events:
     eyebrow: "Events"
     title: "Meetups & Conferences"
